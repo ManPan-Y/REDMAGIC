@@ -1,0 +1,28 @@
+# 节点需求表：显示名|候选路径(逗号分隔，任一存在即通过)
+# customize.sh 调 validate_nodes.sh 逐行硬校验，任何一行全缺失 = 安装中止。
+# 改动机型节点时只改这里，校验脚本不用动。
+风扇开关|/sys/kernel/fan/fan_enable
+风扇档位|/sys/kernel/fan/fan_speed_level,/sys/kernel/fan_speed_level
+液冷开关|/proc/driver/micropump/enable
+液冷频率|/proc/driver/micropump/freq
+液冷转速|/proc/driver/micropump/speed
+电池容量|/sys/class/power_supply/battery/capacity
+电池温度|/sys/class/power_supply/battery/temp
+电池电流|/sys/class/power_supply/battery/current_now
+电池电压|/sys/class/power_supply/battery/voltage_now
+充电器在线(AC)|/sys/class/power_supply/ac/online,/sys/class/power_supply/ucsi-source-psy-*/online,/sys/class/power_supply/policy/online,/sys/class/power_supply/usb/online
+充电器在线(USB)|/sys/class/power_supply/usb/online
+限流节点|/sys/class/qcom-battery/restrict_cur
+充电使能|/sys/class/qcom-battery/charging_enabled
+电池充电使能|/sys/class/qcom-battery/battery_charging_enabled
+温控配置|/vendor/etc/thermal-engine.conf
+CPU 频率节点|/sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
+GPU 频率节点|/sys/class/kgsl/kgsl-3d0/devfreq/max_freq,/sys/class/kgsl/kgsl-3d0/max_gpuclk
+背光节点|/sys/class/backlight/*/brightness
+背光最大亮度|/sys/class/backlight/*/max_brightness
+降温设备目录|/sys/class/thermal
+触控-跟手速度|/proc/touchscreen/follow_hand_level
+触控-稳定程度|/proc/touchscreen/stability_level
+触控-灵敏程度|/proc/touchscreen/sensibility
+触控-上报频率|/proc/touchscreen/tp_report_rate
+触控-边缘防抖|/proc/touchscreen/edge_report_limit

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="color-scheme" content="dark">
+<title>REDMAGIC</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">RM</div>
+      <div class="idbox">
+        <div class="ttl" id="appTitle">REDMAGIC</div>
+        <div class="sub" id="appSub">NX809J</div>
+      </div>
+    </div>
+    <button class="lang" id="langBtn" type="button">EN</button>
+  </header>
+
+  <section class="sys">
+    <div class="cell">
+      <div class="num" id="sysBattery">--</div>
+      <div class="lb" id="lbBattery" data-i18n="battery">电池</div>
+    </div>
+    <div class="cell">
+      <div class="num" id="sysTemp">--</div>
+      <div class="lb" id="lbTemp" data-i18n="temp">温度</div>
+    </div>
+    <div class="cell">
+      <div class="num" id="sysPower">--</div>
+      <div class="lb" id="lbPower" data-i18n="power">功率</div>
+    </div>
+  </section>
+
+  <nav class="nav" id="nav"></nav>
+
+  <main class="panels">
+
+    <!-- ================= 风扇 ================= -->
+    <section class="card" data-panel="fan">
+      <div class="head">
+        <h2><span class="dot" id="fanDot"></span><span data-i18n="fan_title">风扇</span></h2>
+        <span class="tag">FAN</span>
+      </div>
+      <p class="desc" data-i18n="fan_desc">接管风扇档位；系统开关关着时只记档位、不乱写节点。</p>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="fan_switch">风扇接管</div>
+          <div class="d" id="fanStateDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="fanOn"><i></i></label>
+      </div>
+
+      <div class="row block">
+        <div class="sl">
+          <div class="hd"><span data-i18n="fan_level">档位</span><span class="v" id="fanLevelVal">--</span></div>
+          <input type="range" id="fanLevel" min="1" max="5" step="1" value="5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="fan_keep">息屏保持</div>
+          <div class="d" data-i18n="fan_keep_d">息屏后风扇不停；亮屏自动还给系统。</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="fanKeep"><i></i></label>
+      </div>
+
+      <div class="row block">
+        <div class="meta">
+          <div class="k" data-i18n="fan_temp">温度联动</div>
+          <div class="d" data-i18n="fan_temp_d">按电池温度自动调档，优先级高于手调档位。</div>
+        </div>
+        <div class="seg" id="fanTempSeg">
+          <button type="button" data-v="off" data-i18n="off">关闭</button>
+          <button type="button" data-v="auto" data-i18n="auto">自动</button>
+          <button type="button" data-v="custom" data-i18n="custom">自定义</button>
+        </div>
+        <div class="sl" id="fanTempThrWrap" style="display:none">
+          <div class="hd"><span data-i18n="fan_temp_thr">触发温度</span><span class="v" id="fanTempThrVal">--</span></div>
+          <input type="range" id="fanTempThr" min="20" max="70" step="1" value="40">
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 液冷 ================= -->
+    <section class="card" data-panel="pump">
+      <div class="head">
+        <h2><span class="dot" id="pumpDot"></span><span data-i18n="pump_title">液冷</span></h2>
+        <span class="tag">LOOP</span>
+      </div>
+      <p class="desc" data-i18n="pump_desc">控制内循环泵转速。系统没开泵时只记档位。</p>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="pump_switch">液冷接管</div>
+          <div class="d" id="pumpStateDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="pumpOn"><i></i></label>
+      </div>
+
+      <div class="row block">
+        <div class="sl">
+          <div class="hd"><span data-i18n="pump_level">档位</span><span class="v" id="pumpLevelVal">--</span></div>
+          <input type="range" id="pumpLevel" min="1" max="4" step="1" value="4">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="pump_keep">息屏保持</div>
+          <div class="d" data-i18n="pump_keep_d">息屏后泵不停；亮屏自动还给系统。</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="pumpKeep"><i></i></label>
+      </div>
+
+      <div class="row block">
+        <div class="meta">
+          <div class="k" data-i18n="pump_temp">温度联动</div>
+          <div class="d" data-i18n="pump_temp_d">按电池温度自动调档。</div>
+        </div>
+        <div class="seg" id="pumpTempSeg">
+          <button type="button" data-v="off" data-i18n="off">关闭</button>
+          <button type="button" data-v="auto" data-i18n="auto">自动</button>
+          <button type="button" data-v="custom" data-i18n="custom">自定义</button>
+        </div>
+        <div class="sl" id="pumpTempThrWrap" style="display:none">
+          <div class="hd"><span data-i18n="pump_temp_thr">触发温度</span><span class="v" id="pumpTempThrVal">--</span></div>
+          <input type="range" id="pumpTempThr" min="20" max="70" step="1" value="40">
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 充电 ================= -->
+    <section class="card" data-panel="charge">
+      <div class="head">
+        <h2><span class="dot" id="chargeDot"></span><span data-i18n="charge_title">充电</span></h2>
+        <span class="tag">POWER</span>
+      </div>
+      <p class="desc" data-i18n="charge_desc">分离开关由系统设置驱动；加速需要先开温控屏屏蔽。</p>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="charge_sep">充电分离</div>
+          <div class="d" id="chargeSepDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="chargeOn"><i></i></label>
+      </div>
+
+      <div class="row block">
+        <div class="sl">
+          <div class="hd"><span data-i18n="charge_thr">分离阈值</span><span class="v" id="chargeThrVal">--</span></div>
+          <input type="range" id="chargeThr" min="20" max="100" step="1" value="100">
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="boost">充电加速</div>
+          <div class="d" id="boostDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="boostOn"><i></i></label>
+      </div>
+
+      <div class="row block">
+        <div class="sl">
+          <div class="hd"><span data-i18n="boost_thr">温度上限</span><span class="v" id="boostThrVal">--</span></div>
+          <input type="range" id="boostThr" min="20" max="70" step="1" value="42">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="boost_heat">解除热降流</div>
+          <div class="d" data-i18n="boost_heat_d">把电池降温设备的 cur_state 钉 0。</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="boostHeat"><i></i></label>
+      </div>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="fast_switch">熄屏提速</div>
+          <div class="d" id="fastDesc" data-i18n="fast_desc">亮屏充电时只把「熄屏」告诉充电模组，显示与亮度不变。</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="fastOn"><i></i></label>
+      </div>
+    </section>
+
+    <!-- ================= 温控 ================= -->
+    <section class="card" data-panel="thermal">
+      <div class="head">
+        <h2><span class="dot" id="thermalDot"></span><span data-i18n="thermal_title">温控屏蔽</span></h2>
+        <span class="tag">THERMAL</span>
+      </div>
+      <p class="desc" data-i18n="thermal_desc">用空文件顶替 /vendor/etc/thermal-engine.conf 并放开频率节点权限。</p>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="thermal_switch">温控屏蔽</div>
+          <div class="d" id="thermalDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="thermalOn"><i></i></label>
+      </div>
+
+      <p class="hint" data-i18n="thermal_warn">关闭后会连带停用充电加速。重启后由 post-fs-data 在系统服务启动前重新挂载。</p>
+    </section>
+
+    <!-- ================= 触控 ================= -->
+    <section class="card" data-panel="touch">
+      <div class="head">
+        <h2><span class="dot" id="touchDot"></span><span data-i18n="touch_title">触控</span></h2>
+        <span class="tag">TOUCH</span>
+      </div>
+      <p class="desc" id="touchDesc" data-i18n="touch_desc">15 项触控参数：5 项可填自定义数值，其余按档位选择；写入后逐项回读核对。</p>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="touch_switch">触控优化</div>
+          <div class="d" id="touchStateDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="touchOn"><i></i></label>
+      </div>
+
+      <div class="row block">
+        <div class="k" data-i18n="touch_preset">预设</div>
+        <div class="seg small" id="touchPresetSeg">
+          <button type="button" data-v="official_gaming" data-i18n="preset_gaming">电竞</button>
+          <button type="button" data-v="official_daily" data-i18n="preset_daily">日常</button>
+        </div>
+      </div>
+
+      <div id="touchForm" class="tch"></div>
+
+      <div class="inl">
+        <button class="btn pri" id="touchApply" type="button" data-i18n="apply">应用</button>
+        <button class="btn ghost" id="touchReset" type="button" data-i18n="revert">还原</button>
+        <span class="pill" id="touchDirty" style="display:none" data-i18n="unsaved">未应用</span>
+      </div>
+      <p class="hint" data-i18n="touch_hint">「应用」才会写节点；改完不点应用，切页回来会还原成上次生效的值。</p>
+    </section>
+
+    <!-- ================= 采样率 ================= -->
+    <section class="card" data-panel="rate">
+      <div class="head">
+        <h2><span class="dot" id="rateDot"></span><span data-i18n="rate_title">触控采样率</span></h2>
+        <span class="tag">RATE</span>
+      </div>
+      <p class="desc" data-i18n="rate_desc">直接写触控驱动上报频率档位（120/180/300/360/720Hz）；息屏与游戏空间接管时自动让行。</p>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="rate_switch">采样率拉满</div>
+          <div class="d" id="rateDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="rateOn"><i></i></label>
+      </div>
+
+      <div class="inl">
+        <span class="lb2" data-i18n="rate_max">上限</span>
+        <input type="number" id="rateMax" inputmode="numeric" min="120" max="720" placeholder="auto">
+        <button class="btn" id="rateApply" type="button" data-i18n="apply">应用</button>
+        <span class="pill" id="rateCur">--</span>
+      </div>
+    </section>
+
+    <!-- ================= 性能 ================= -->
+    <section class="card" data-panel="perf">
+      <div class="head">
+        <h2><span class="dot" id="perfDot"></span><span data-i18n="perf_title">性能</span></h2>
+        <span class="tag">PERF</span>
+      </div>
+      <p class="desc" data-i18n="perf_desc">频率表直接读系统；选定后打开锁定即固定在该频率（min=max）。GPU 在息屏与游戏空间接管时自动让行。</p>
+
+      <div class="row block">
+        <div class="meta">
+          <div class="k" data-i18n="cpu_small">CPU 小核频率</div>
+          <div class="d" id="cpu0Desc">--</div>
+        </div>
+        <select id="cpu0Sel" class="sel"></select>
+      </div>
+
+      <div class="row block">
+        <div class="meta">
+          <div class="k" data-i18n="cpu_big">CPU 大核频率</div>
+          <div class="d" id="cpu1Desc">--</div>
+        </div>
+        <select id="cpu1Sel" class="sel"></select>
+      </div>
+
+      <div class="row block">
+        <div class="meta">
+          <div class="k" data-i18n="gpu_title">GPU 频率</div>
+          <div class="d" id="gpuDesc">--</div>
+        </div>
+        <select id="gpuSel" class="sel"></select>
+      </div>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="freq_lock">锁定频率</div>
+          <div class="d" data-i18n="freq_lock_d">锁定后 min=max；看门狗会把被系统改掉的频率拉回。</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="freqLock"><i></i></label>
+      </div>
+    </section>
+
+    <!-- ================= 亮度 ================= -->
+    <section class="card" data-panel="bright">
+      <div class="head">
+        <h2><span class="dot" id="brightDot"></span><span data-i18n="bright_title">亮度解锁</span></h2>
+        <span class="tag">LIGHT</span>
+      </div>
+      <p class="desc" data-i18n="bright_desc">系统把亮度顶到自身上限时，继续写到面板物理上限。</p>
+
+      <div class="row">
+        <div class="meta">
+          <div class="k" data-i18n="bright_switch">亮度解锁</div>
+          <div class="d" id="brightDesc">--</div>
+        </div>
+        <label class="sw"><input type="checkbox" id="brightOn"><i></i></label>
+      </div>
+
+      <div class="inl">
+        <span class="lb2" data-i18n="bright_goal">目标</span>
+        <input type="number" id="brightGoal" inputmode="numeric" placeholder="auto">
+        <button class="btn" id="brightApply" type="button" data-i18n="apply">应用</button>
+      </div>
+      <div class="hint" id="brightInfo">--</div>
+    </section>
+
+    <!-- ================= 状态 ================= -->
+    <section class="card" data-panel="status">
+      <div class="head">
+        <h2><span class="dot" id="modDot"></span><span data-i18n="status_title">模块状态</span></h2>
+        <span class="tag">STATUS</span>
+      </div>
+
+      <div class="grid2">
+        <div class="mini"><div class="n" id="stModule">--</div><div class="l" data-i18n="st_module">健康</div></div>
+        <div class="mini"><div class="n" id="stCs">--</div><div class="l" data-i18n="st_cs">充电分离</div></div>
+        <div class="mini"><div class="n" id="stThermal">--</div><div class="l" data-i18n="st_thermal">温控屏蔽</div></div>
+        <div class="mini"><div class="n" id="stBoost">--</div><div class="l" data-i18n="st_boost">充电加速</div></div>
+        <div class="mini"><div class="n" id="stRate">--</div><div class="l" data-i18n="st_rate">采样率</div></div>
+        <div class="mini"><div class="n" id="stTouch">--</div><div class="l" data-i18n="st_touch">触控</div></div>
+        <div class="mini"><div class="n" id="stCpu">--</div><div class="l" data-i18n="st_cpu">CPU 上限</div></div>
+      </div>
+      <div class="bar"><i id="stBar"></i></div>
+      <div class="hint" id="stFail">--</div>
+
+      <div class="sep"></div>
+
+      <div class="k sec" data-i18n="bh_title">电池健康</div>
+      <div class="grid2">
+        <div class="mini"><div class="n" id="bhSoh">--</div><div class="l" data-i18n="bh_soh">健康度</div></div>
+        <div class="mini"><div class="n" id="bhCycle">--</div><div class="l" data-i18n="bh_cycle">循环次数</div></div>
+        <div class="mini"><div class="n" id="bhFull">--</div><div class="l" data-i18n="bh_full">满充 / 设计</div></div>
+        <div class="mini"><div class="n" id="bhRes">--</div><div class="l" data-i18n="bh_res">内阻</div></div>
+        <div class="mini"><div class="n" id="bhSkin">--</div><div class="l" data-i18n="bh_skin">皮肤温度</div></div>
+      </div>
+    </section>
+
+    <!-- ================= 日志 / 诊断 ================= -->
+    <section class="card" data-panel="status">
+      <div class="head">
+        <h2><span class="dot"></span><span data-i18n="log_title">日志与自检</span></h2>
+        <span class="tag">LOG</span>
+      </div>
+
+      <div class="qbtns">
+        <button class="btn" id="logRefresh" type="button" data-i18n="log_refresh">读取日志</button>
+        <button class="btn" id="logDiag" type="button" data-i18n="log_diag">运行自检</button>
+      </div>
+      <pre id="log">--</pre>
+    </section>
+
+  </main>
+
+  <p class="hint foot" data-i18n="foot">仅在 NX809J 上验证 · 所有改动均可还原</p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/core.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/touch.js"></script>
+<script src="js/status.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

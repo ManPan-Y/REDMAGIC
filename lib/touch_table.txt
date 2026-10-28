@@ -1,0 +1,17 @@
+# 触控表：显示名|节点(相对 /proc/touchscreen)|edge_report_limit 子字段(空=直写整节点)|写模式
+# 写模式空 = 写 "字段:值"；bare = 只写裸数字（pixel limit level 的驱动语法）
+跟手速度|follow_hand_level|
+稳定程度|stability_level|
+灵敏程度|sensibility|
+上报频率|tp_report_rate|
+边缘防抖|edge_report_limit|algo_open
+防抖像素|edge_report_limit|jitter_pixel
+防抖时间|edge_report_limit|jitter_timer
+点击容错|edge_report_limit|click_pixel
+长按识别|edge_report_limit|long_press_open
+长按时长|edge_report_limit|long_press_timer
+长按范围|edge_report_limit|long_press_pixel
+边缘防误触|edge_report_limit|pixel limit level|bare
+握持防误触|rotation_limit_level|
+手掌抑制|tp_palm_mode|
+手写笔模式|pen_only|

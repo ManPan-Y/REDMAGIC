@@ -1,0 +1,7 @@
+id=REDMAGIC
+name=REDMAGIC 内核模块
+version=v3.5.0
+versionCode=350
+author=REDMAGIC
+description=仅红魔 11 Pro+ (NX809J) · 风扇/液冷全速 · 边充不断电 · 温控屏蔽 · 充电提速 · 熄屏提速 · 亮度解锁 · 触控 15 项 · 采样率 720Hz · CPU/GPU 频率固定 · 皮肤温度联动 · 电池健康
+updateJson=https://cdn.jsdelivr.net/gh/ManPan-Y/REDMAGIC@main/update.json
